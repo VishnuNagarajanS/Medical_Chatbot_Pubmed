@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.env
+*.db
+media/responses/*
+!media/responses/.gitkeep
+.pytest_cache/
+.mypy_cache/
+*.wav
+*.webm
+*.mp3
+.DS_Store

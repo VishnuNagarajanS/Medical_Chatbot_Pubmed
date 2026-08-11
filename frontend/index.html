@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Voice Agent</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">🎙️</div>
+      <div>
+        <h1>AI Voice Agent</h1>
+        <p class="subtitle">Speak a question — get a spoken answer</p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="card status-card">
+        <div class="status-row">
+          <span id="status-dot" class="status-dot idle"></span>
+          <span id="status-text" class="status-text">Ready — click the mic to start</span>
+        </div>
+        <div class="record-area">
+          <button id="record-btn" class="record-btn" aria-label="Record question">
+            <span class="mic-icon">🎤</span>
+          </button>
+          <p class="record-hint">Click to record, click again to stop</p>
+        </div>
+      </section>
+
+      <section class="card results-card">
+        <h2>Results</h2>
+        <div class="result-block">
+          <label>You said</label>
+          <p id="transcribed-text" class="result-text muted">—</p>
+        </div>
+        <div class="result-block">
+          <label>Matched question</label>
+          <p id="matched-question" class="result-text muted">—</p>
+        </div>
+        <div class="result-block">
+          <label>Answer</label>
+          <p id="answer-text" class="result-text muted">—</p>
+        </div>
+        <div class="result-block">
+          <label>Confidence</label>
+          <p id="confidence-score" class="result-text muted">—</p>
+        </div>
+        <audio id="answer-audio" controls hidden></audio>
+      </section>
+
+      <section class="card admin-card">
+        <h2>Admin — Q&amp;A Bank</h2>
+        <p class="admin-hint">Upload a JSON file to replace the predefined question-answer pairs.</p>
+        <div class="upload-row">
+          <input type="file" id="qa-upload" accept=".json" />
+          <button id="upload-btn" class="secondary-btn">Upload Q&amp;A Bank</button>
+        </div>
+        <p id="upload-status" class="upload-status"></p>
+        <details class="qa-preview">
+          <summary>View loaded Q&amp;A pairs (<span id="qa-count">0</span>)</summary>
+          <ul id="qa-list"></ul>
+        </details>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Phase 1 — Predefined Q&amp;A Voice Agent</span>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

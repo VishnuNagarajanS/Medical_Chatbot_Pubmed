@@ -1,0 +1,82 @@
+[
+  {
+    "question": "What is FastAPI?",
+    "answer": "FastAPI is a modern, high-performance Python web framework for building APIs. It is easy to use, fast to code, and production ready."
+  },
+  {
+    "question": "What is your name?",
+    "answer": "I am your AI voice assistant, here to answer your questions."
+  },
+  {
+    "question": "What is Python?",
+    "answer": "Python is a popular, easy-to-learn programming language used for web development, data science, automation, and artificial intelligence."
+  },
+  {
+    "question": "What is machine learning?",
+    "answer": "Machine learning is a branch of artificial intelligence where computers learn patterns from data to make predictions or decisions without being explicitly programmed for every task."
+  },
+  {
+    "question": "What is speech to text?",
+    "answer": "Speech to text, or STT, is technology that converts spoken language into written text using audio processing and machine learning models."
+  },
+  {
+    "question": "What is text to speech?",
+    "answer": "Text to speech, or TTS, is technology that converts written text into spoken audio, allowing computers to talk to users naturally."
+  },
+  {
+    "question": "What is an API?",
+    "answer": "An API, or Application Programming Interface, is a set of rules that lets different software applications communicate and exchange data with each other."
+  },
+  {
+    "question": "What is a REST API?",
+    "answer": "A REST API is a web API that uses HTTP methods like GET, POST, PUT, and DELETE to perform operations on resources, following REST architectural principles."
+  },
+  {
+    "question": "What is a WebSocket?",
+    "answer": "A WebSocket is a communication protocol that provides full-duplex, real-time communication between a client and a server over a single persistent connection."
+  },
+  {
+    "question": "What is SQLite?",
+    "answer": "SQLite is a lightweight, file-based relational database engine that stores data in a single file and requires no separate server process."
+  },
+  {
+    "question": "What is semantic search?",
+    "answer": "Semantic search finds results based on meaning and context rather than exact keyword matching, often using vector embeddings and similarity scores."
+  },
+  {
+    "question": "What is FAISS?",
+    "answer": "FAISS is a library developed by Meta for efficient similarity search and clustering of dense vectors, commonly used in AI retrieval systems."
+  },
+  {
+    "question": "What is Whisper?",
+    "answer": "Whisper is an open-source speech recognition model from OpenAI that transcribes audio into text across many languages with high accuracy."
+  },
+  {
+    "question": "How does this voice agent work?",
+    "answer": "This voice agent listens to your question, converts your speech to text, finds the best matching answer from a predefined question bank, and speaks the answer back to you."
+  },
+  {
+    "question": "What technologies power this project?",
+    "answer": "This project uses FastAPI for the backend, faster-whisper for speech to text, sentence-transformers and FAISS for question matching, and edge-tts for text to speech."
+  },
+  {
+    "question": "What is Phase 2 of this project?",
+    "answer": "Phase 2 will add a configurable persona prompt and LLM-driven conversation, allowing natural multi-turn dialogue instead of fixed question and answer pairs."
+  },
+  {
+    "question": "What is a vector embedding?",
+    "answer": "A vector embedding is a numerical representation of text that captures semantic meaning, allowing similar phrases to be compared using distance or cosine similarity."
+  },
+  {
+    "question": "What is cosine similarity?",
+    "answer": "Cosine similarity measures how similar two vectors are by calculating the cosine of the angle between them, with values closer to one indicating greater similarity."
+  },
+  {
+    "question": "How do I use this application?",
+    "answer": "Click the record button, speak your question clearly, then click stop. The system will transcribe your question, find a matching answer, and play it back automatically."
+  },
+  {
+    "question": "What should I do if my question is not recognized?",
+    "answer": "If your question is not recognized, try rephrasing it closer to one of the predefined topics, or speak more clearly in a quiet environment."
+  }
+]

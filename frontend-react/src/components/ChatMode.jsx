@@ -51,9 +51,9 @@ export default function ChatMode({ messages, isSending, errorMessage, onSend }) 
                 key={idx}
                 className={`chat-mode-row ${msg.role === "user" ? "chat-mode-row-user" : "chat-mode-row-ai"}`}
               >
-                <div className={`chat-mode-avatar ${msg.role === "user" ? "chat-mode-avatar-user" : "chat-mode-avatar-ai"}`}>
-                  {msg.role === "user" ? "U" : "AI"}
-                </div>
+                {msg.role === "assistant" && (
+                  <div className="chat-mode-avatar chat-mode-avatar-ai">AI</div>
+                )}
                 <div className={`chat-mode-bubble ${msg.role === "user" ? "chat-mode-bubble-user" : "chat-mode-bubble-ai"}`}>
                   {msg.content}
                 </div>

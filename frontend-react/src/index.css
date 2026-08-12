@@ -499,7 +499,6 @@ body {
 
 .chat-mode-row-user {
   justify-content: flex-end;
-  flex-direction: row-reverse;
 }
 
 .chat-mode-avatar {

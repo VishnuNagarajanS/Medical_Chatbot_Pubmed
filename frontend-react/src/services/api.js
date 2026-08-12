@@ -42,6 +42,15 @@ export async function sendMessage(sessionId, audioBlob) {
   return handleResponse(res);
 }
 
+export async function sendTextMessage(sessionId, message) {
+  const res = await fetch(`${API_BASE}/api/v1/conversation/message-text`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ session_id: sessionId, message }),
+  });
+  return handleResponse(res);
+}
+
 export async function endConversation(sessionId) {
   const res = await fetch(`${API_BASE}/api/v1/conversation/${sessionId}`, {
     method: "DELETE",

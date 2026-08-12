@@ -11,7 +11,7 @@ const UPLOAD_STATUS_MESSAGES = [
 ];
 const UPLOAD_STATUS_INTERVAL_MS = 1800;
 
-export default function Sidebar({ onNewConversation, onOpenSettings, isSessionActive }) {
+export default function Sidebar({ onNewConversation, onOpenSettings, isSessionActive, mode, onModeChange }) {
   const [collapsed, setCollapsed] = useState(false);
   const [documents, setDocuments] = useState([]);
   const [uploadStatus, setUploadStatus] = useState(""); // "", "uploading", "error"
@@ -140,6 +140,30 @@ export default function Sidebar({ onNewConversation, onOpenSettings, isSessionAc
         <span className="sidebar-icon">+</span>
         {!collapsed && <span>New Conversation</span>}
       </button>
+
+      <div className="sidebar-section">
+        {!collapsed && <span className="sidebar-section-label">Mode</span>}
+        <div className={`mode-switch ${collapsed ? "mode-switch-collapsed" : ""}`}>
+          <button
+            className={`mode-switch-btn ${mode === "voice" ? "mode-switch-btn-active" : ""}`}
+            onClick={() => onModeChange("voice")}
+            aria-pressed={mode === "voice"}
+            title="Voice agent mode"
+          >
+            <span className="sidebar-icon">🎙</span>
+            {!collapsed && <span>Voice Agent</span>}
+          </button>
+          <button
+            className={`mode-switch-btn ${mode === "chat" ? "mode-switch-btn-active" : ""}`}
+            onClick={() => onModeChange("chat")}
+            aria-pressed={mode === "chat"}
+            title="Chatbot mode"
+          >
+            <span className="sidebar-icon">💬</span>
+            {!collapsed && <span>Chatbot</span>}
+          </button>
+        </div>
+      </div>
 
       <div className="sidebar-section">
         {!collapsed && <span className="sidebar-section-label">Current Session</span>}

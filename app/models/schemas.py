@@ -52,6 +52,11 @@ class ConversationStartData(BaseModel):
     session_id: str
 
 
+class ConversationTextMessageRequest(BaseModel):
+    session_id: str
+    message: str
+
+
 class ConversationMessageData(BaseModel):
     transcribed_text: str
     response_text: str

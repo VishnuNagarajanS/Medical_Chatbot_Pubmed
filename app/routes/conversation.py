@@ -10,6 +10,7 @@ from app.models.schemas import (
     ConversationMessageData,
     ConversationStartData,
     ConversationSummary,
+    ConversationTextMessageRequest,
     ErrorDetail,
 )
 from app.services.conversation_manager import ConversationManager
@@ -145,6 +146,71 @@ async def send_message(
             session_id=session_id,
         ),
     )
+
+@router.post("/message-text", response_model=ApiResponse[ConversationMessageData])
+async def send_text_message(
+    request: Request,
+    payload: ConversationTextMessageRequest,
+) -> ApiResponse[ConversationMessageData]:
+    """Chatbot-mode counterpart to /message. Same session, persona, and
+    document-aware pipeline as the voice flow, minus STT/TTS — the request
+    and reply are plain text end-to-end."""
+    conversation_manager: ConversationManager = request.app.state.conversation_manager
+    llm_service: LLMService = request.app.state.llm_service
+    document_store: DocumentStore = request.app.state.document_store
+
+    session = conversation_manager.get_session(payload.session_id)
+    if session is None:
+        return ApiResponse(
+            success=False,
+            error=ErrorDetail(code="SESSION_NOT_FOUND", message="Invalid or expired session_id."),
+        )
+
+    message = (payload.message or "").strip()
+    if not message:
+        return ApiResponse(
+            success=False,
+            error=ErrorDetail(code="EMPTY_MESSAGE", message="Message cannot be empty."),
+        )
+
+    history = conversation_manager.get_history(payload.session_id)
+
+    relevant_chunks = document_store.search(message)
+    document_context = "\n\n---\n\n".join(
+        f'From "{chunk.doc_name}":\n{chunk.text}' for chunk in relevant_chunks
+    )
+    system_context = f"Document status:\n{document_store.get_document_status_summary()}"
+
+    try:
+        # Same persona lookup as voice mode: always the current global
+        # persona, so Settings changes apply live to chatbot mode too.
+        reply_text = llm_service.generate_reply(
+            persona_prompt=conversation_manager.get_persona(),
+            history=history,
+            user_message=message,
+            document_context=document_context,
+            system_context=system_context,
+        )
+    except Exception as exc:
+        logger.exception("LLM generation failed")
+        return ApiResponse(
+            success=False,
+            error=ErrorDetail(code="LLM_FAILED", message=f"Response generation failed: {exc}"),
+        )
+
+    conversation_manager.append_exchange(payload.session_id, message, reply_text)
+
+    return ApiResponse(
+        success=True,
+        data=ConversationMessageData(
+            transcribed_text=message,
+            response_text=reply_text,
+            response_audio_url=None,
+            response_audio_base64=None,
+            session_id=payload.session_id,
+        ),
+    )
+
 
 @router.get("/history", response_model=ApiResponse[ConversationHistoryData])
 async def get_conversation_history(request: Request) -> ApiResponse[ConversationHistoryData]:
